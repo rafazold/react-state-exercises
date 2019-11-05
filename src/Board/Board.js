@@ -10,14 +10,39 @@ import './Board.css';
  */
 
 class Board extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			boardClicked1: false,
+			boardClicked2: false,
+			boardClicked3: false
+		}
+	}
+
+	resetBoards() {
+		this.setState({
+			boardClicked1: false,
+			boardClicked2: false,
+			boardClicked3: false
+		});
+	}
+
+	makeRed(e) {
+		this.resetBoards();
+		this.setState({
+			["boardClicked" + (e.target.innerText).toString()]: true
+		});
+	}
+
+
 	render() {
 		return (
 			<div className="Board">
 				<h1>Choose board:</h1>
 				<div className="boards">
-					<div className="Board-option">1</div>
-					<div className="Board-option">2</div>
-					<div className="Board-option">3</div>
+					<div className={`Board-option ${this.state.boardClicked1 ? "red-board" : ''}`} onClick={this.makeRed.bind(this)}>1</div>
+					<div className={`Board-option ${this.state.boardClicked2 ? "red-board" : ''}`} onClick={this.makeRed.bind(this)}>2</div>
+					<div className={`Board-option ${this.state.boardClicked3 ? "red-board" : ''}`} onClick={this.makeRed.bind(this)}>3</div>
 				</div>
 			</div>
 		);
